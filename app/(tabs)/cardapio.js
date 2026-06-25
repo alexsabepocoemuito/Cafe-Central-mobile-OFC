@@ -42,7 +42,7 @@ export default function Cardapio() {
 
   return (
     <ScrollView>
-      <Header ativo="cardapio"></Header>
+      <Header></Header>
 
       <View>
         {/* CATEGORIAS */}
