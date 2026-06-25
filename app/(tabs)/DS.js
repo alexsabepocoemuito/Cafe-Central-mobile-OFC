@@ -6,29 +6,10 @@ import Footer from '../../components/Footer'
 
 export default function DS() {
     return (
-        <ScrollView>
-            {/* TOPO - HEADER */}
-            <View style={styles.header}>
-                <Link href='/' asChild>
-                    <TouchableOpacity>
-                        <Image source={require('../../assets/images/cafecentral.jpg')} style={styles.headerLogo} />
-                    </TouchableOpacity>
-                </Link>
 
-                <Link href='/login' asChild>
-                    <TouchableOpacity>
-                        <Image source={require('../../assets/images/icone_perfil.png')} style={styles.iconeLogin} />
-                    </TouchableOpacity>
-                </Link>
-            </View>
-            {/* MENU */}
-            <View style={styles.hero}>
-                <View style={styles.heroIndex}>
-                    <Link href='/' asChild><TouchableOpacity style={styles.menuItem}><Text>Início</Text></TouchableOpacity></Link>
-                    <Link href='/sobre' asChild><TouchableOpacity style={styles.menuItem}><Text>Sobre</Text></TouchableOpacity></Link>
-                    <Link href='/contato' asChild><TouchableOpacity style={styles.menuItem}><Text>Contato</Text></TouchableOpacity></Link>
-                </View>
-            </View>
+        <ScrollView>
+            <Header ativo="DS"></Header>
+
             {/*------------------------------------------------------------------------------------------------------*/}
             {/* CONTEÚDO */}
 
@@ -74,17 +55,9 @@ export default function DS() {
                     </Link>
                 </View>
             </View>
-            {/*------------------------------------------------------------------------------------------------------*/}
-            {/* RODAPÉ - FOOTER */}
-            <View style={styles.rodape}>
-                { /* Texto de direitos de autorais */}
-                <Text style={styles.textoRodape}> © 2026 Café Central. Todos os direitos reservados.</Text>
 
-                { /* Links de Contato */}
-                <Link href='/contato' asChild>
-                    <Text style={styles.linkRodape}>Entre em contato</Text>
-                </Link>
-            </View>
+            <Footer></Footer>
         </ScrollView>
+
     );
 }

@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
 
     menuItem: {
         color: '#000000',
-        backgroundColor: '#dbd5d5',
+        backgroundColor: '#fff',
         padding: 15,
         fontSize: 15,
         alignItems: 'center',
@@ -90,14 +90,17 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         textAlign: 'center',
+        marginTop: 30
     },
 
     heroTexto2: {
+        backgroundColor: '#745739',
         color: '#e4ad76',
         fontSize: 35,
         fontWeight: 'bold',
         alignItems: 'center',
         marginTop: 10,
+        marginBottom: 70,
         textAlign: 'center',
     },
 
@@ -106,7 +109,6 @@ export const styles = StyleSheet.create({
         height: '100',
         backgroundColor: '#202427',
         padding: 40,
-        marginTop: 50,
         alignItems: 'center',
         justifyContent: 'space-betwee',
     },

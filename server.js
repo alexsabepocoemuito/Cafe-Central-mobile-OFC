@@ -1,4 +1,4 @@
-// CARREGA AS VARIÁVEIS DE AMBIENTE ANTES DE QUALQUER COISA
+// CARREGA AS VARIÁVEIS DE AMBIENTE
 require("dotenv").config();
 
 const express = require("express");
@@ -13,12 +13,20 @@ const listOrigins = [
   "http://localhost:8081",
   "http://localhost:5501",
   "http://127.0.0.1:5501",
-  "https://FireDW.github.io"
+  "https://firedw.github.io",
+  "https://FireDW.github.io",
+  "https://cafecentral-mobile.onrender.com"
 ];
 
 app.use(
   cors({
-    origin: listOrigins,
+    origin: function (origin, callback) {
+      if (!origin || listOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Origem bloqueada pelo CORS: " + origin));
+      }
+    },
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"]
@@ -54,68 +62,102 @@ app.get("/", (req, res) => {
   res.send("API CafeCentral Mobile funcionando");
 });
 
+// TESTE DO BANCO
+app.get("/teste-banco", async (req, res) => {
+  try {
+    const [resultado] = await pool.execute("SELECT 1 AS teste");
+
+    res.json({
+      mensagem: "Banco conectado com sucesso!",
+      resultado
+    });
+  } catch (erro) {
+    console.log("Erro ao testar banco:", erro);
+
+    res.status(500).json({
+      erro: "Erro ao conectar no banco",
+      detalhe: erro.message
+    });
+  }
+});
+
 // CADASTRO
 app.post("/cadastro", async (req, res) => {
   try {
-    const { nome_usuario, email_usuario, senha_usuario } = req.body;
+    const { nome, email, senha } = req.body;
 
-    console.log(req.body);
+    console.log("Dados recebidos no cadastro:", req.body);
 
-    if (!nome_usuario || !email_usuario || !senha_usuario) {
-      return res.status(400).json({ erro: "Preencha todos os campos!" });
+    if (!nome || !email || !senha) {
+      return res.status(400).json({
+        erro: "Preencha todos os campos!"
+      });
     }
 
-    const [rows] = await pool.execute(
+    const [usuariosExistentes] = await pool.execute(
       "SELECT id FROM tb_usuarios WHERE email = ?",
-      [email_usuario]
+      [email]
     );
 
-    if (rows.length > 0) {
-      return res.status(409).json({ erro: "E-mail já cadastrado!" });
+    if (usuariosExistentes.length > 0) {
+      return res.status(409).json({
+        erro: "E-mail já cadastrado!"
+      });
     }
 
-    const senhaHash = await bcrypt.hash(senha_usuario, 10);
+    const senhaHash = await bcrypt.hash(senha, 10);
 
-    const sql = `
-      INSERT INTO tb_usuarios (nome, email, senha)
-      VALUES (?, ?, ?)
-    `;
+    await pool.execute(
+      "INSERT INTO tb_usuarios (nome, email, senha) VALUES (?, ?, ?)",
+      [nome, email, senhaHash]
+    );
 
-    await pool.execute(sql, [nome_usuario, email_usuario, senhaHash]);
+    return res.status(201).json({
+      mensagem: "Usuário cadastrado com sucesso!"
+    });
 
-    res.json({ mensagem: "Usuário cadastrado com sucesso!" });
   } catch (erro) {
     console.log("Erro no cadastro:", erro);
-    res.status(500).json({ erro: "Erro ao cadastrar usuário!" });
+
+    return res.status(500).json({
+      erro: "Erro ao cadastrar usuário!",
+      detalhe: erro.message
+    });
   }
 });
 
 // LOGIN
 app.post("/login", async (req, res) => {
   try {
-    const { email_usuario, senha_usuario } = req.body;
+    const { email, senha } = req.body;
 
-    if (!email_usuario || !senha_usuario) {
-      return res.status(400).json({ erro: "Preencha todos os campos!" });
+    console.log("Dados recebidos no login:", req.body);
+
+    if (!email || !senha) {
+      return res.status(400).json({
+        erro: "Preencha todos os campos!"
+      });
     }
 
-    const sql = `
-      SELECT * FROM tb_usuarios
-      WHERE email = ?
-    `;
-
-    const [resultado] = await pool.execute(sql, [email_usuario]);
+    const [resultado] = await pool.execute(
+      "SELECT * FROM tb_usuarios WHERE email = ?",
+      [email]
+    );
 
     if (resultado.length === 0) {
-      return res.status(401).json({ erro: "Usuário ou senha inválidos!" });
+      return res.status(401).json({
+        erro: "Usuário ou senha inválidos!"
+      });
     }
 
     const usuario = resultado[0];
 
-    const senhaCorreta = await bcrypt.compare(senha_usuario, usuario.senha);
+    const senhaCorreta = await bcrypt.compare(senha, usuario.senha);
 
     if (!senhaCorreta) {
-      return res.status(401).json({ erro: "Senha inválida!" });
+      return res.status(401).json({
+        erro: "Senha inválida!"
+      });
     }
 
     req.session.usuario = {
@@ -124,7 +166,7 @@ app.post("/login", async (req, res) => {
       email: usuario.email
     };
 
-    res.json({
+    return res.json({
       mensagem: "Login realizado com sucesso!",
       usuario: {
         id: usuario.id,
@@ -132,9 +174,14 @@ app.post("/login", async (req, res) => {
         email: usuario.email
       }
     });
+
   } catch (erro) {
     console.log("Erro no login:", erro);
-    res.status(500).json({ erro: "Erro ao fazer login!" });
+
+    return res.status(500).json({
+      erro: "Erro ao fazer login!",
+      detalhe: erro.message
+    });
   }
 });
 
@@ -143,26 +190,32 @@ app.post("/contato", async (req, res) => {
   try {
     const { nome_mensagem, email_mensagem, mensagem_mensagem } = req.body;
 
+    console.log("Dados recebidos no contato:", req.body);
+
     if (!nome_mensagem || !email_mensagem || !mensagem_mensagem) {
-      return res.status(400).json({ erro: "Preencha todos os campos!" });
+      return res.status(400).json({
+        erro: "Preencha todos os campos!"
+      });
     }
 
-    const sql = `
-      INSERT INTO tb_mensagem 
+    await pool.execute(
+      `INSERT INTO tb_mensagem 
       (nome_mensagem, email_mensagem, mensagem_mensagem)
-      VALUES (?, ?, ?)
-    `;
+      VALUES (?, ?, ?)`,
+      [nome_mensagem, email_mensagem, mensagem_mensagem]
+    );
 
-    await pool.execute(sql, [
-      nome_mensagem,
-      email_mensagem,
-      mensagem_mensagem
-    ]);
+    return res.json({
+      mensagem: "Mensagem enviada com sucesso!"
+    });
 
-    res.json({ mensagem: "Mensagem enviada com sucesso!" });
   } catch (erro) {
     console.log("Erro no contato:", erro);
-    res.status(500).json({ erro: "Erro ao enviar mensagem!" });
+
+    return res.status(500).json({
+      erro: "Erro ao enviar mensagem!",
+      detalhe: erro.message
+    });
   }
 });
 

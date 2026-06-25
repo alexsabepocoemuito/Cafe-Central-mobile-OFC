@@ -5,7 +5,7 @@ import { styles } from '../../assets/style/styles.js';
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 
-const API_URL = "https://cafe-central-ofc.onrender.com" //-------
+const API_URL = "https://cafecentral-mobile.onrender.com" //-------
 
 export default function Cadastro() {
   const [nome, setNome] = useState('');
@@ -17,120 +17,98 @@ export default function Cadastro() {
   const [tipoMensagem, setTipoMensagem] = useState('');
 
   async function validarCadastro() {
-  if (nome === '') {
-    setMensagemSistema('Digite seu nome!');
-    setTipoMensagem('erro!');
-    return;
-  }
-
-  if (/\d/.test(nome)) {
-    setMensagemSistema('O nome não pode conter número!');
-    setTipoMensagem('erro!');
-    return;
-  }
-
-  if (email === '') {
-    setMensagemSistema('Digite seu e-mail!');
-    setTipoMensagem('erro!');
-    return;
-  }
-
-  if (!email.includes('@') || !email.includes('.com')) {
-    setMensagemSistema('Digite um e-mail válido!');
-    setTipoMensagem('erro!');
-    return;
-  }
-
-  if (senha === '') {
-    setMensagemSistema('Digite sua senha!');
-    setTipoMensagem('erro!');
-    return;
-  }
-
-  if (senha.length < 8) {
-    setMensagemSistema('A senha deve conter no mínimo 8 caracteres!');
-    setTipoMensagem('erro!');
-    return;
-  }
-
-  if (confirmarSenha === '') {
-    setMensagemSistema('Confirme sua senha!');
-    setTipoMensagem('erro!');
-    return;
-  }
-
-  if (confirmarSenha.length < 8) {
-    setMensagemSistema('A confirmação da senha deve conter no mínimo 8 caracteres!');
-    setTipoMensagem('erro!');
-    return;
-  }
-
-  if (senha !== confirmarSenha) {
-    setMensagemSistema('As senhas não coincidem!');
-    setTipoMensagem('erro!');
-    return;
-  }
-
-  try {
-    const resposta = await fetch(`${API_URL}/cadastro`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      credentials: 'include',
-      body: JSON.stringify({
-        nome_usuario: nome,
-        email_usuario: email,
-        senha_usuario: senha
-      })
-    });
-
-    const dados = await resposta.json();
-
-    if (resposta.ok) {
-      setMensagemSistema(dados.mensagem || 'Cadastro realizado com sucesso!');
-      setTipoMensagem('sucesso!');
-      setNome('');
-      setEmail('');
-      setSenha('');
-      setConfirmarSenha('');
-    } else {
-      setMensagemSistema(dados.erro || 'Erro ao cadastrar');
+    if (nome === '') {
+      setMensagemSistema('Digite seu nome!');
       setTipoMensagem('erro!');
+      return;
     }
 
-  } catch (erro) {
-    console.log(erro);
-    setMensagemSistema('Erro ao conectar com o servidor');
-    setTipoMensagem('erro!');
+    if (/\d/.test(nome)) {
+      setMensagemSistema('O nome não pode conter número!');
+      setTipoMensagem('erro!');
+      return;
+    }
+
+    if (email === '') {
+      setMensagemSistema('Digite seu e-mail!');
+      setTipoMensagem('erro!');
+      return;
+    }
+
+    if (!email.includes('@') || !email.includes('.com')) {
+      setMensagemSistema('Digite um e-mail válido!');
+      setTipoMensagem('erro!');
+      return;
+    }
+
+    if (senha === '') {
+      setMensagemSistema('Digite sua senha!');
+      setTipoMensagem('erro!');
+      return;
+    }
+
+    if (senha.length < 8) {
+      setMensagemSistema('A senha deve conter no mínimo 8 caracteres!');
+      setTipoMensagem('erro!');
+      return;
+    }
+
+    if (confirmarSenha === '') {
+      setMensagemSistema('Confirme sua senha!');
+      setTipoMensagem('erro!');
+      return;
+    }
+
+    if (confirmarSenha.length < 8) {
+      setMensagemSistema('A confirmação da senha deve conter no mínimo 8 caracteres!');
+      setTipoMensagem('erro!');
+      return;
+    }
+
+    if (senha !== confirmarSenha) {
+      setMensagemSistema('As senhas não coincidem!');
+      setTipoMensagem('erro!');
+      return;
+    }
+
+    try {
+      const resposta = await fetch(`${API_URL}/cadastro`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          nome_usuario: nome,
+          email_usuario: email,
+          senha_usuario: senha
+        })
+      });
+
+      const dados = await resposta.json();
+
+      if (resposta.ok) {
+        setMensagemSistema(dados.mensagem || 'Cadastro realizado com sucesso!');
+        setTipoMensagem('sucesso!');
+        setNome('');
+        setEmail('');
+        setSenha('');
+        setConfirmarSenha('');
+      } else {
+        setMensagemSistema(dados.erro || 'Erro ao cadastrar');
+        setTipoMensagem('erro!');
+      }
+
+    } catch (erro) {
+      console.log(erro);
+      setMensagemSistema('Erro ao conectar com o servidor');
+      setTipoMensagem('erro!');
+    }
   }
-}
 
   return (
     <ScrollView>
-      {/* HEADER */}
-      <View style={styles.header}>
-        <Link href='/' asChild>
-          <TouchableOpacity>
-            <Image source={require('../../assets/images/cafecentral.jpg')} style={styles.headerLogo} />
-          </TouchableOpacity>
-        </Link>
-
-        <Link href='/login' asChild>
-          <TouchableOpacity>
-            <Image source={require('../../assets/images/icone_perfil.png')} style={styles.iconeLogin} />
-          </TouchableOpacity>
-        </Link>
-      </View>
-
-      {/* MENU */}
-      <View style={styles.hero}>
-        <View style={styles.heroIndex}>
-          <Link href='/' asChild><TouchableOpacity style={styles.menuItem}><Text>Início</Text></TouchableOpacity></Link>
-          <Link href='/sobre' asChild><TouchableOpacity style={styles.menuItem}><Text>Sobre</Text></TouchableOpacity></Link>
-          <Link href='/contato' asChild><TouchableOpacity style={styles.menuItem}><Text>Contato</Text></TouchableOpacity></Link>
-        </View>
-      </View>
+      <Header ativo="cadastro"></Header>
 
       {/* CONTEÚDO */}
       <View style={styles.container}>
@@ -196,15 +174,9 @@ export default function Cadastro() {
       </View>
 
       {/* RODAPÉ */}
-      <View style={styles.rodape}>
-        <Text style={styles.textoRodape}>
-          © 2026 Café Central. Todos os direitos reservados.
-        </Text>
+      <Footer></Footer>
 
-        <Link href='/contato' asChild>
-          <Text style={styles.linkRodape}>Entre em contato</Text>
-        </Link>
-      </View>
     </ScrollView>
+
   );
 }

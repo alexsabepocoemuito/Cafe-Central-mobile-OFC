@@ -1,4 +1,4 @@
-import { Link, router } from 'expo-router';
+import { Link } from 'expo-router';
 import { useState } from 'react';
 import { Image, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { styles } from '../../assets/style/styles.js';
@@ -15,7 +15,7 @@ export default function Login() {
   const [mensagemSistema, setMensagemSistema] = useState('');
   const [tipoMensagem, setTipoMensagem] = useState('');
 
-  async function  validarLogin() {
+  async function validarLogin() {
     if (email == '') {
       setMensagemSistema('Digite seu e-mail!');
       setTipoMensagem('erro!');
@@ -36,24 +36,24 @@ export default function Login() {
       setTipoMensagem('erro!');
       return;
     }
-/*---------------------------------------------------------------------------------------------------------*/
+    /*---------------------------------------------------------------------------------------------------------*/
     // TENTA EXECUTAR O BLOCO, SE DER ERRO, CAI NO CATCH
-    try{
+    try {
       // FAZ UMA REQUISIÇÃO HTTP PARA A ROTA DA API USANDO O MÉTODO POST
-      const resposta = await fetch(`${API_URL}/login`,{
+      const resposta = await fetch(`${API_URL}/login`, {
         method: 'POST', // A REQUISIÇÃO ENVIA DADOS
-        headers: {'Content-Type': 'application/json'}, // INFOMA QUE O CORPO DA REQUISIÇÃO ESTÁ EM JSON
+        headers: { 'Content-Type': 'application/json' }, // INFOMA QUE O CORPO DA REQUISIÇÃO ESTÁ EM JSON
         credentials: 'include', // INCLUI COOKIES E SESSÃO NA REQUISIÇÃO, ÚTIL PARA AUTENTIFICAÇÃO
         body: JSON.stringify({ // CONVERTE OS OBJETOS EM JSON
           email: email,
           senha: senha
         })
       });
-   /*---------------------------------------------------------------------------------------------------------*/
+      /*---------------------------------------------------------------------------------------------------------*/
       // CONVERTE A RESPOSTA RECEBIDA DA API DE JSON PARA OBJETO JAVASCRIPT
       const dados = await resposta.json();
 
-      if(resposta.ok){
+      if (resposta.ok) {
         setMensagemSistema(dados.mensagem || 'Login realizado com sucesso!')
         setTipoMensagem('sucesso!')
         setEmail('');
@@ -61,7 +61,7 @@ export default function Login() {
         router.push('/cardapio')
       }
 
-    } catch(erro) {
+    } catch (erro) {
       setMensagemSistema("Erro ao conectar com o servidor")
       // Define o "estilo" da mensagem como erro
       setTipoMensagem("erro!")
@@ -73,33 +73,11 @@ export default function Login() {
     setEmail('');
     setSenha('');
   }
-/*---------------------------------------------------------------------------------------------------------*/
+  /*---------------------------------------------------------------------------------------------------------*/
   return (
     <ScrollView>
       {/* HEADER */}
-      <View style={styles.header}>
-        <Link href='/' asChild>
-          <TouchableOpacity>
-            <Image source={require('../../assets/images/cafecentral.jpg')} style={styles.headerLogo} />
-          </TouchableOpacity>
-        </Link>
-
-        <Link href='/login' asChild>
-          <TouchableOpacity>
-            <Image source={require('../../assets/images/icone_perfil.png')} style={styles.iconeLogin} />
-          </TouchableOpacity>
-        </Link>
-      </View>
-
-      {/* MENU */}
-      <View style={styles.hero}>
-        <View style={styles.heroIndex}>
-          <Link href='/' asChild><TouchableOpacity style={styles.menuItem}><Text>Início</Text></TouchableOpacity></Link>
-          <Link href='/sobre' asChild><TouchableOpacity style={styles.menuItem}><Text>Sobre</Text></TouchableOpacity></Link>
-          <Link href='/contato' asChild><TouchableOpacity style={styles.menuItem}><Text>Contato</Text></TouchableOpacity></Link>
-        </View>
-      </View>
-
+      <Header ativo="login"></Header>
       {/* CONTEÚDO */}
       <View style={styles.container}>
         <View style={styles.pagina}>
@@ -152,16 +130,7 @@ export default function Login() {
         </View>
       </View>
 
-      {/* RODAPÉ */}
-      <View style={styles.rodape}>
-        <Text style={styles.textoRodape}>
-          © 2026 Café Central. Todos os direitos reservados.
-        </Text>
-
-        <Link href='/contato' asChild>
-          <Text style={styles.linkRodape}>Entre em contato</Text>
-        </Link>
-      </View>
+      <Footer></Footer>
     </ScrollView>
   );
 }

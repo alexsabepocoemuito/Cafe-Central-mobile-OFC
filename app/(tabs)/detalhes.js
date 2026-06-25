@@ -14,31 +14,10 @@ export default function Detalhes() {
   } = useLocalSearchParams();
 
   return (
+
     <ScrollView>
+      <Header ativo="detalhes"></Header>
 
-      {/* TOPO - HEADER*/}
-      <View style={styles.header}>
-        <Link href='/' asChild>
-          <TouchableOpacity>
-            <Image source={require('../../assets/images/cafecentral.jpg')} style={styles.headerLogo} />
-          </TouchableOpacity>
-        </Link>
-
-        <Link href='/login' asChild>
-          <TouchableOpacity>
-            <Image source={require('../../assets/images/icone_perfil.png')} style={styles.iconeLogin} />
-          </TouchableOpacity>
-        </Link>
-      </View>
-
-      {/* MENU */}
-      <View style={styles.hero}>
-        <View style={styles.heroIndex}>
-          <Link href='/' asChild><TouchableOpacity style={styles.menuItem}><Text>Início</Text></TouchableOpacity></Link>
-          <Link href='/sobre' asChild><TouchableOpacity style={styles.menuItem}><Text>Sobre</Text></TouchableOpacity></Link>
-          <Link href='/contato' asChild><TouchableOpacity style={styles.menuItem}><Text>Contato</Text></TouchableOpacity></Link>
-        </View>
-      </View>
 
       {/* CONTEÚDO */}
       { /*=========== CONTEÚDO DA PÁGINA =============*/}
@@ -62,15 +41,8 @@ export default function Detalhes() {
         </View>
       </View>
 
-
-      {/* RODAPÉ */}
-      <View style={styles.rodape}>
-        <Text style={styles.textoRodape}>© 2026 Café Central. Todos os direitos reservados.</Text>
-        <Link href="/contato" asChild>
-          <Text style={styles.linkRodape}>Entre em contato</Text>
-        </Link>
-      </View>
-
+      <Footer></Footer>
     </ScrollView>
+
   );
 }

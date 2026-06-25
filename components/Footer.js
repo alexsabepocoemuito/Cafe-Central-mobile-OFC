@@ -1,6 +1,7 @@
 import {View, Text, StyleSheet} from 'react-native'
 import { Link } from 'expo-router'
 
+
 export default function Footer(){
     return(
       <View style={styles.rodape}>
@@ -14,8 +15,7 @@ export default function Footer(){
     )
 }
 
-const style = StyleSheetw.create({
-
+const styles = StyleSheet.create({
     rodape: {
         backgroundColor: '#3b2a1a',
         paddingVertical: 25,
@@ -36,8 +36,5 @@ const style = StyleSheetw.create({
         fontWeight: 'bold',
         fontSize: 15,
     },
-
-}
-);
 
 })

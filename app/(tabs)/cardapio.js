@@ -42,29 +42,9 @@ export default function Cardapio() {
 
   return (
     <ScrollView>
+      <Header ativo="cardapio"></Header>
 
-      <View style={styles.header}>
-        <Link href='/' asChild>
-          <TouchableOpacity>
-            <Image source={require('../../assets/images/cafecentral.jpg')} style={styles.headerLogo} />
-          </TouchableOpacity>
-        </Link>
-
-        <Link href='/login' asChild>
-          <TouchableOpacity>
-            <Image source={require('../../assets/images/icone_perfil.png')} style={styles.iconeLogin} />
-          </TouchableOpacity>
-        </Link>
-      </View>
-
-      {/* MENU */}
-      <View style={styles.hero}>
-        <View style={styles.heroIndex}>
-          <Link href='/' asChild><TouchableOpacity style={styles.menuItem}><Text>Início</Text></TouchableOpacity></Link>
-          <Link href='/sobre' asChild><TouchableOpacity style={styles.menuItem}><Text>Sobre</Text></TouchableOpacity></Link>
-          <Link href='/contato' asChild><TouchableOpacity style={styles.menuItem}><Text>Contato</Text></TouchableOpacity></Link>
-        </View>
-
+      <View>
         {/* CATEGORIAS */}
         <View style={styles.categorias}>
           <Text style={styles.titulo}>Nosso Cardápio</Text>
@@ -117,16 +97,10 @@ export default function Cardapio() {
               </Link>
             </View>
           </View>
-        )}
-      />
-      {/* ============================================================================================================ */}
-      {/* RODAPÉ */}
-      <View style={styles.rodape}>
-        <Text style={styles.textoRodape}>
-          © 2026 Café Central. Todos os direitos reservados.
-        </Text>
-      </View>
+        )} />
 
+      <Footer></Footer>
     </ScrollView>
+
   )
 }

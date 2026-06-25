@@ -28,10 +28,10 @@ export default function Header({ ativo }) {
         <View style={styles.heroIndex}>
           <Link href="/" asChild>
             <TouchableOpacity
-              style={[
+              style={StyleSheet.flatten([
                 styles.menuItem,
-                ativo === "inicio" && styles.ativo
-              ]}
+                ativo === "inicio" ? styles.ativo : null
+              ])}
             >
               <Text style={styles.textoMenu}>Início</Text>
             </TouchableOpacity>
@@ -39,10 +39,10 @@ export default function Header({ ativo }) {
 
           <Link href="/sobre" asChild>
             <TouchableOpacity
-              style={[
+              style={StyleSheet.flatten([
                 styles.menuItem,
-                ativo === "sobre" && styles.ativo
-              ]}
+                ativo === "sobre" ? styles.ativo : null
+              ])}
             >
               <Text style={styles.textoMenu}>Sobre</Text>
             </TouchableOpacity>
@@ -50,10 +50,10 @@ export default function Header({ ativo }) {
 
           <Link href="/contato" asChild>
             <TouchableOpacity
-              style={[
+              style={StyleSheet.flatten([
                 styles.menuItem,
-                ativo === "contato" && styles.ativo
-              ]}
+                ativo === "contato" ? styles.ativo : null
+              ])}
             >
               <Text style={styles.textoMenu}>Contato</Text>
             </TouchableOpacity>

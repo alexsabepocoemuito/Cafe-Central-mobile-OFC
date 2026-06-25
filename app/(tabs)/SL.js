@@ -7,30 +7,7 @@ import Footer from '../../components/Footer'
 export default function SL() {
     return (
         <ScrollView>
-
-            {/* TOPO - HEADER*/}
-            <View style={styles.header}>
-                <Link href='/' asChild>
-                    <TouchableOpacity>
-                        <Image source={require('../../assets/images/cafecentral.jpg')} style={styles.headerLogo} />
-                    </TouchableOpacity>
-                </Link>
-
-                <Link href='/login' asChild>
-                    <TouchableOpacity>
-                        <Image source={require('../../assets/images/icone_perfil.png')} style={styles.iconeLogin} />
-                    </TouchableOpacity>
-                </Link>
-            </View>
-            {/* ============================================================================================================ */}
-            {/* MENU */}
-            <View style={styles.hero}>
-                <View style={styles.heroIndex}>
-                    <Link href='/' asChild><TouchableOpacity style={{ ...styles.menuItem, ...styles.ativo }}><Text>Início</Text></TouchableOpacity></Link>
-                    <Link href='/sobre' asChild><TouchableOpacity style={styles.menuItem}><Text> Sobre</Text></TouchableOpacity></Link>
-                    <Link href='/contato' asChild><TouchableOpacity style={styles.menuItem}><Text>Contato</Text></TouchableOpacity></Link>
-                </View>
-            </View>
+            <Header ativo="SL"></Header>
 
             {/*------------------------------------------------------------------------------------------------------*/}
             {/* CONTEÚDO */}
@@ -92,6 +69,7 @@ export default function SL() {
                     <Text style={styles.linkRodape}>Entre em contato</Text>
                 </Link>
             </View>
+            <Footer></Footer>
         </ScrollView>
     );
 }
