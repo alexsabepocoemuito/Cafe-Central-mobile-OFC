@@ -11,9 +11,10 @@ const app = express();
 
 const listOrigins = [
   "http://localhost:8081",
+  "http://localhost:8082",
   "http://localhost:5501",
   "http://127.0.0.1:5501",
-  "https://alexsabepocoemuito.github.io/cafecentral-mobile",
+  "https://alexsabepocoemuito.github.io",
   "https://cafecentral-mobile.onrender.com"
 ];
 
