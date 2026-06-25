@@ -1,17 +1,11 @@
 import { Link } from 'expo-router';
 import { useState } from 'react';
-import {
-  FlatList,
-  Image,
-  ScrollView,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import {FlatList,Image,ScrollView,Text,TextInput,TouchableOpacity,View} from 'react-native';
 
 import produtosJson from '../../assets/data/produtos.json';
 import { styles } from '../../assets/style/styles.js';
+import Header from '../../components/Header'
+import Footer from '../../components/Footer'
 
 export default function Cardapio() {
   const imagensCardapio = {
@@ -43,25 +37,7 @@ export default function Cardapio() {
   return (
     <ScrollView>
       {/* HEADER */}
-      <View style={styles.header}>
-        <Link href="/" asChild>
-          <TouchableOpacity>
-            <Image
-              source={require('../../assets/images/cafecentral.jpg')}
-              style={styles.headerLogo}
-            />
-          </TouchableOpacity>
-        </Link>
-
-        <Link href="/login" asChild>
-          <TouchableOpacity>
-            <Image
-              source={require('../../assets/images/icone_perfil.png')}
-              style={styles.iconeLogin}
-            />
-          </TouchableOpacity>
-        </Link>
-      </View>
+     <Header ativo="cardapio"></Header>
 
       {/* MENU */}
       <View style={styles.hero}>
@@ -172,17 +148,7 @@ export default function Cardapio() {
       />
 
       {/* RODAPÉ */}
-      <View style={styles.rodape}>
-        <Text style={styles.textoRodape}>
-          © 2026 Café Central. Todos os direitos reservados.
-        </Text>
-
-        <Link href="/contato" asChild>
-          <Text style={styles.linkRodape}>
-            Entre em contato
-          </Text>
-        </Link>
-      </View>
+      <Footer></Footer>
     </ScrollView>
   );
 }
