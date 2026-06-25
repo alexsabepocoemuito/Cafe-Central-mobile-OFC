@@ -5,7 +5,7 @@ import { styles } from '../../assets/style/styles.js';
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 
-const API_URL = "https://cafe-central-ofc.onrender.com"
+const API_URL = "https://cafecentral-mobile.onrender.com";
 
 export default function Contato() {
     const [nome, setNome] = useState('');
