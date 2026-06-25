@@ -79,9 +79,9 @@ export default function Cadastro() {
         },
         credentials: 'include',
         body: JSON.stringify({
-          nome_usuario: nome,
-          email_usuario: email,
-          senha_usuario: senha
+          nome: nome,
+          email: email,
+          senha: senha
         })
       });
 
