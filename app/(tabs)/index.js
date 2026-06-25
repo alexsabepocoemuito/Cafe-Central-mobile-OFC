@@ -8,19 +8,7 @@ export default function Index() {
   return (
     <ScrollView  >
       {/* TOPO - HEADER*/}
-      <View style={styles.header}>
-        <Link href='/' asChild>
-          <TouchableOpacity>
-            <Image source={require('../../assets/images/cafecentral.jpg')} style={styles.headerLogo} />
-          </TouchableOpacity>
-        </Link>
-
-        <Link href='/login' asChild>
-          <TouchableOpacity>
-            <Image source={require('../../assets/images/icone_perfil.png')} style={styles.iconeLogin} />
-          </TouchableOpacity>
-        </Link>
-      </View>
+      <Header ativo="index"></Header>
 
       {/* ============================================================================================================ */}
       {/* MENU */}
