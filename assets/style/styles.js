@@ -278,6 +278,7 @@ export const styles = StyleSheet.create({
     /* ====================== CARDÁPIO | DETALHES ====================== */
     /* ===================  CE | DS | SL =================== */
     categorias: {
+        backgroundColor: '#745739',
         justifyContent: 'center',
         padding: 20,
         elevation: 5,

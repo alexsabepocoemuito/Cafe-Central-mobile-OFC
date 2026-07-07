@@ -1,4 +1,4 @@
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 import { useState } from 'react';
 import { Image, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { styles } from '../../assets/style/styles.js';
@@ -56,9 +56,12 @@ export default function Login() {
       if (resposta.ok) {
         setMensagemSistema(dados.mensagem || 'Login realizado com sucesso!')
         setTipoMensagem('sucesso!')
+
         setEmail('');
         setSenha('');
-        router.push('/cardapio')
+
+        router.replace("/cardapio");
+        return;
       }
 
     } catch (erro) {

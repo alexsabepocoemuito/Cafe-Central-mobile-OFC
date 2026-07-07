@@ -148,8 +148,7 @@ app.post("/login", async (req, res) => {
       return res.status(401).json({
         erro: "Usuário ou senha inválidos!"
       });
-    }
-
+    };
     const usuario = resultado[0];
 
     const senhaCorreta = await bcrypt.compare(senha, usuario.senha);
@@ -167,12 +166,13 @@ app.post("/login", async (req, res) => {
     };
 
     return res.json({
+      sucesso: true,
       mensagem: "Login realizado com sucesso!",
       usuario: {
         id: usuario.id,
         nome: usuario.nome,
         email: usuario.email
-      }
+      },
     });
 
   } catch (erro) {

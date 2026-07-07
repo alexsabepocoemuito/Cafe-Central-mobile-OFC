@@ -33,13 +33,10 @@ export default function Sobre() {
   return (
 
     <ScrollView>
-
-      <Header ativo="sobre"></Header>
       {/* TOPO - HEADER*/}
+      <Header ativo="sobre"></Header>
+      
       {/* ============================================================================================================ */}
-
-      {/* ============================================================================================================ */}
-
       {/* Desenvolver Aqui */}
       <View style={styles.heroConteudo}>
         <View style={styles.heroSobre}>
