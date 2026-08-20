@@ -347,7 +347,47 @@ export const styles = StyleSheet.create({
     textoBtnCategoria: {
         fontSize: 14,
         textAlign: 'center',
-        color: '#ea9f51'
+        color: '#ea9f51',
+        margin: 5,
+    },
+
+    acoesProduto: {
+        gap: 10,
+        marginTop: 14,
+    },
+
+    btnDetalhes: {
+        backgroundColor: '#F5E9DA',
+        borderWidth: 1,
+        borderColor: '#C08B5C',
+        paddingVertical: 10,
+        borderRadius: 8,
+        alignItems: 'center',
+    },
+
+    textoBtnDetalhes: {
+        color: '#8B5E34',
+        fontWeight: '600',
+        fontSize: 14,
+    },
+
+    btnAdicionar: {
+        backgroundColor: '#C08B5C',
+        paddingVertical: 12,
+        borderRadius: 8,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.15,
+        shadowRadius: 3,
+        elevation: 2, 
+    },
+
+    textoBtnAdicionar: {
+        color: '#FFF',
+        fontWeight: 'bold',
+        fontSize: 14,
+        letterSpacing: 0.3,
     },
 
     nomeProduto: {
@@ -391,6 +431,126 @@ export const styles = StyleSheet.create({
         color: '#ea9f51',
     },
 
+    carrinhoLista: { 
+        padding: 100, 
+        margin: 15, 
+        gap: 12,
+        backgroundColor: '#f5f5f5',
+        borderColor:'#555',
+        borderRadius: 10,
+    },
+
+    carrinhoVazio: { 
+        textAlign: 'center', 
+        color: '#888', 
+        marginTop: 24 
+    },
+
+    carrinhoItem: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#fff',
+        borderRadius: 8,
+        padding: 12,
+        marginBottom: 12,
+    },
+
+    carrinhoItemImagem: { 
+        width: 60, 
+        height: 60, 
+        borderRadius: 6, 
+        marginRight: 12 
+    },
+
+    carrinhoItemInfo: { 
+        flex: 1 
+    },
+
+    carrinhoItemTitulo: { 
+        fontWeight: 'bold', 
+        fontSize: 16 
+    },
+
+    carrinhoItemPreco: { 
+        color: '#555', 
+        marginTop: 4 
+    },
+
+    carrinhoQuantidade: { 
+        flexDirection: 'row', 
+        alignItems: 'center', 
+        marginTop: 8, 
+        gap: 12 
+    },
+    
+    carrinhoQuantidadeBtn: { 
+        fontSize: 18, 
+        paddingHorizontal: 8 
+    },
+
+    carrinhoQuantidadeValor: { 
+        fontSize: 16 
+    },
+
+    carrinhoRemover: { 
+        color: '#dc3545', 
+        marginLeft: 12 
+    },
+
+    carrinhoResumo: { 
+        padding: 16, 
+        backgroundColor: '#f5f5f5', 
+        margin: 15, 
+        borderRadius: 8 
+    },
+
+    carrinhoResumoTitulo: { 
+        fontSize: 18, 
+        fontWeight: 'bold', 
+        marginBottom: 12 
+    },
+
+    resumoItem: { 
+        flexDirection: 'row', 
+        justifyContent: 'space-between', 
+        marginBottom: 6 
+    },
+
+    resumoTotal: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        fontWeight: 'bold',
+        marginTop: 8,
+        marginBottom: 16,
+    },
+
+    btnFinalizar: { 
+        backgroundColor: '#28a745', 
+        padding: 14, borderRadius: 8, 
+        alignItems: 'center' 
+    },
+
+    textoBtnFinalizar: { 
+        color: '#fff', 
+        fontWeight: 'bold' 
+    },
+
+    btnContinuar: { 
+        padding: 14, 
+        borderRadius: 8, 
+        alignItems: 'center', 
+        marginTop: 12, 
+        borderWidth: 1 
+    },
+
+    textoBtnContinuar: { 
+        fontWeight: 'bold' 
+    },
+
+    btnLimpar: { 
+        backgroundColor: '#dc3545', 
+        borderWidth: 0 
+    },
     //*================================================================================================================================ */
     //================= RODAPÉ ================= 
     rodape: {

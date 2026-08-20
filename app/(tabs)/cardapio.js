@@ -1,11 +1,14 @@
 import { Link } from 'expo-router';
 import { useState } from 'react';
-import {FlatList,Image,ScrollView,Text,TextInput,TouchableOpacity,View} from 'react-native';
+import {FlatList,Image,ScrollView,Text,TextInput,TouchableOpacity,View,Alert} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import produtosJson from '../../assets/data/produtos.json';
 import { styles } from '../../assets/style/styles.js';
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
+
+const CHAVE_CARRINHO = '@carrinho';
 
 export default function Cardapio() {
   const imagensCardapio = {
@@ -29,10 +32,55 @@ export default function Cardapio() {
   }));
 
   const [busca, setBusca] = useState('');
+  const [categoria, setCategoria] = useState(null); // null = "todas"
+
+  const categorias = [
+    { chave: 'CE', label: 'Cafés Especiais' },
+    { chave: 'DS', label: 'Doces e Sobremesas' },
+    { chave: 'SL', label: 'Salgados e Lanches' },
+  ];
 
   const produtosFiltrados = produtos.filter((produto) => {
-    return produto.titulo.toLowerCase().includes(busca.toLowerCase());
+    const bateBusca = produto.titulo.toLowerCase().includes(busca.toLowerCase());
+    const bateCategoria = !categoria || produto.categoria === categoria;
+    return bateBusca && bateCategoria;
   });
+
+  const adicionarAoCarrinho = async (produto) => {
+    try {
+      const dados = await AsyncStorage.getItem(CHAVE_CARRINHO);
+      const itensAtuais = dados ? JSON.parse(dados) : [];
+
+      // não guardamos "imagem" (require) no JSON do storage, só o nome do arquivo
+      const itemExistente = itensAtuais.find((item) => item.id === produto.id);
+
+      let novosItens;
+      if (itemExistente) {
+        novosItens = itensAtuais.map((item) =>
+          item.id === produto.id
+            ? { ...item, quantidade: (item.quantidade || 1) + 1 }
+            : item
+        );
+      } else {
+        novosItens = [
+          ...itensAtuais,
+          {
+            id: produto.id,
+            titulo: produto.titulo,
+            preco: produto.preco,
+            imagemNome: produto.imagemNome, // nome do arquivo, ex: 'espresso.png'
+            quantidade: 1,
+          },
+        ];
+      }
+
+      await AsyncStorage.setItem(CHAVE_CARRINHO, JSON.stringify(novosItens));
+      Alert.alert('Adicionado!', `${produto.titulo} foi adicionado ao carrinho.`);
+    } catch (erro) {
+      console.log('Erro ao adicionar ao carrinho:', erro);
+      Alert.alert('Erro', 'Não foi possível adicionar o item ao carrinho.');
+    }
+  };
 
   return (
     <ScrollView>
@@ -51,29 +99,20 @@ export default function Cardapio() {
         />
 
         <View style={styles.teste}>
-          <Link href="/CE" asChild>
-            <TouchableOpacity style={styles.btnCategoria}>
-              <Text style={styles.textoBtnCategoria}>
-                Cafés Especiais
-              </Text>
+          {categorias.map((cat) => (
+            <TouchableOpacity
+              key={cat.chave}
+              style={[
+                styles.btnCategoria,
+                categoria === cat.chave && styles.btnCategoriaAtivo,
+              ]}
+              onPress={() =>
+                setCategoria(categoria === cat.chave ? null : cat.chave)
+              }
+            >
+              <Text style={styles.textoBtnCategoria}>{cat.label}</Text>
             </TouchableOpacity>
-          </Link>
-
-          <Link href="/DS" asChild>
-            <TouchableOpacity style={styles.btnCategoria}>
-              <Text style={styles.textoBtnCategoria}>
-                Doces e Sobremesas
-              </Text>
-            </TouchableOpacity>
-          </Link>
-
-          <Link href="/SL" asChild>
-            <TouchableOpacity style={styles.btnCategoria}>
-              <Text style={styles.textoBtnCategoria}>
-                Salgados e Lanches
-              </Text>
-            </TouchableOpacity>
-          </Link>
+          ))}
         </View>
       </View>
 
@@ -102,23 +141,34 @@ export default function Cardapio() {
                 {item.preco}
               </Text>
 
-              <Link
-                href={{
-                  pathname: '/detalhes',
-                  params: {
-                    titulo: item.titulo,
-                    descricao: item.descricao,
-                    preco: item.preco
-                  }
-                }}
-                asChild
-              >
-                <TouchableOpacity style={styles.btnDetalhes}>
-                  <Text style={styles.textoBtnDetalhes}>
-                    Ver detalhes
+              <View style={styles.acoesProduto}>
+                <Link
+                  href={{
+                    pathname: '/detalhes',
+                    params: {
+                      titulo: item.titulo,
+                      descricao: item.descricao,
+                      preco: item.preco
+                    }
+                  }}
+                  asChild
+                >
+                  <TouchableOpacity style={styles.btnDetalhes}>
+                    <Text style={styles.textoBtnDetalhes}>
+                      Ver detalhes
+                    </Text>
+                  </TouchableOpacity>
+                </Link>
+
+                <TouchableOpacity
+                  style={styles.btnAdicionar}
+                  onPress={() => adicionarAoCarrinho(item)}
+                >
+                  <Text style={styles.textoBtnAdicionar}>
+                    Adicionar ao Carrinho
                   </Text>
                 </TouchableOpacity>
-              </Link>
+              </View>
             </View>
           </View>
         )}

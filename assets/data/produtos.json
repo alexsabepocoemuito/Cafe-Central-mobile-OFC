@@ -4,83 +4,95 @@
     "titulo": "Espresso",
     "imagem": "espresso.png",
     "descricao": "Um shot concentrado e aromático do nosso blend especial, com crema perfeita. Ideal para os amantes do café puro.",
-    "preco": "R$ 3,00"
+    "preco": "R$ 3,00",
+    "categoria": "CE"
   },
   {
     "id": "2",
     "titulo": "Cappuccino Clássico",
     "imagem": "cappuccino_classico.png",
     "descricao": "Uma bebida encorpada, com sabor equilibrado, sem chocolate e servida com um toque de canela por cima, oferecendo textura aveludada e aroma intenso.",
-    "preco": "R$ 8,00"
+    "preco": "R$ 8,00",
+    "categoria": "CE"
   },
   {
     "id": "3",
     "titulo": "Latte Macchiato",
     "imagem": "latte_macchiato.png",
     "descricao": "Leite vaporizado delicadamente manchado com um shot de espresso, criando camadas visíveis e um sabor suave e cremoso.",
-    "preco": "R$ 8,00"
+    "preco": "R$ 8,00",
+    "categoria": "CE"
   },
   {
     "id": "4",
     "titulo": "Mocha",
     "imagem": "mocha.png",
     "descricao": "Uma deliciosa combinação de espresso, chocolate premium, leite vaporizado e chantilly, para um toque de indulgência.",
-    "preco": "R$ 7,00"
+    "preco": "R$ 7,00",
+    "categoria": "CE"
   },
   {
     "id": "5",
     "titulo": "Pão de Queijo Artesanal",
     "imagem": "pao_de_queijo_artesanal.png",
     "descricao": "Delicioso pão de queijo artesanal, feito com leite e queijo fresco. O sabor autêntico que encanta todos os paladares.",
-    "preco": "R$ 6,00"
+    "preco": "R$ 6,00",
+    "categoria": "SL"
   },
   {
     "id": "6",
     "titulo": "Sanduíche de Queijo Quente",
     "imagem": "sanduiche_de_queijo_quente.png",
     "descricao": "Pão de forma tostado com queijo mussarela derretido. Simples e delicioso.",
-    "preco": "R$ 8,00"
+    "preco": "R$ 8,00",
+    "categoria": "SL"
   },
   {
     "id": "7",
     "titulo": "Quiche Lorraine",
     "imagem": "quiche_lorraine.png",
     "descricao": "Uma torta salgada clássica francesa, com recheio cremoso de bacon e queijo. Servida com uma pequena salada verde.",
-    "preco": "R$ 5,00"
+    "preco": "R$ 5,00",
+    "categoria": "SL"
   },
   {
     "id": "8",
     "titulo": "Baguete Recheada",
     "imagem": "baguete_recheada.png",
     "descricao": "Baguete crocante recheada com presunto, queijo e tomate fresco. Ideal para um lanche rápido e saboroso.",
-    "preco": "R$ 9,00"
+    "preco": "R$ 9,00",
+    "categoria": "SL"
   },
   {
     "id": "9",
     "titulo": "Croissant Amanteigado ",
     "imagem": "croissant_amanteigado.png",
     "descricao": "Crocante por fora, macio por dentro, com o sabor inconfundível da manteiga. Perfeito para acompanhar seu café.",
-    "preco": "R$ 7,00"
+    "preco": "R$ 7,00",
+    "categoria": "SL"
   },
   {
     "id": "10",
     "titulo": "Torta de Maçã com Sorvete",
     "imagem": "torta_de_maca_com_sorvete.png",
     "descricao": "Fatias de maçã caramelizada em uma masa crocante, servida quente com uma bola de sorvete de creme.",
-    "preco": "R$ 8,00"
+    "preco": "R$ 8,00",
+    "categoria": "DS"
   },
   {
     "id": "11",
     "titulo": "Brownie de Chocolate com Nozes",
     "imagem": "brownie_de_chocolate_com_nozes.png",
     "descricao": "Intenso e úmido, com pedaços crocantes de nozes. Uma explosão de sabor a cada mordida.",
-    "preco": "R$ 7,00"
+    "preco": "R$ 7,00",
+    "categoria": "DS"
   },
   {
     "id": "12",
     "titulo": "Bolo Red Velvet",
     "imagem": "bolo_red_velvet.png",
     "descricao": "Um clássico americano, com camadas de bolo aveludado de chocolate e um cremoso recheio de cream cheese.",
-    "preco": "R$ 9,00"
+    "preco": "R$ 9,00",
+    "categoria": "DS"
   }
 ]
