@@ -13,15 +13,24 @@ export default function Header({ ativo }) {
             />
           </TouchableOpacity>
         </Link>
-
-        <Link href="/login" asChild>
-          <TouchableOpacity style={styles.botaoLogin}>
-            <Image
-              source={require("../assets/images/icone_perfil.png")}
-              style={styles.iconeLogin}
-            />
-          </TouchableOpacity>
-        </Link>
+        <View style={styles.icones}>
+          <Link href="/login" asChild>
+            <TouchableOpacity style={styles.botaoLogin}>
+              <Image
+                source={require("../assets/images/icone_perfil.png")}
+                style={styles.iconeLogin}
+              />
+            </TouchableOpacity>
+          </Link>
+          <Link href="/carrinho" asChild>
+            <TouchableOpacity style={styles.botaoCarrinho}>
+              <Image
+                source={require("../assets/images/icone_carrinho.png")}
+                style={styles.iconeCarrinho}
+              />
+            </TouchableOpacity>
+          </Link>
+        </View>
       </View>
 
       <View style={styles.hero}>
@@ -69,6 +78,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#e6e2e2",
     alignItems: "center",
     paddingTop: 10,
+    position: "relative", // 👈 necessário para o absolute funcionar em relação ao header
   },
 
   headerLogo: {
@@ -77,17 +87,28 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
 
-  botaoLogin: {
-    position: "absolute",
+  icones: {
+    position: "absolute",  // 👈 tira do fluxo normal
+    top: 15,
     right: 15,
-    top: 20,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,               // espaçamento entre login e carrinho
   },
 
   iconeLogin: {
-    width: 45,
-    height: 45,
+    width: 40,
+    height: 40,
     resizeMode: "contain",
   },
+
+  iconeCarrinho: {
+    width: 40,
+    height: 40,
+    resizeMode: "contain",
+  },
+
+  // pode remover botaoLogin e botaoCarrinho, não são mais necessários
 
   hero: {
     backgroundColor: "#745739",

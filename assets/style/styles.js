@@ -27,6 +27,14 @@ export const styles = StyleSheet.create({
         marginBottom: 10
     },
 
+    iconeCarrinho: {
+        alignSelf: 'flex-end',
+        width: '20%',
+        height: 50,
+        resizeMode: "contain",
+        marginBottom: 10  
+    },
+
     menuItem: {
         color: '#000000',
         backgroundColor: '#fff',
@@ -277,6 +285,10 @@ export const styles = StyleSheet.create({
     // =======================================================================================================
     /* ====================== CARDÁPIO | DETALHES ====================== */
     /* ===================  CE | DS | SL =================== */
+    categoriasBackGround: {
+        backgroundColor: '#745739',
+    },
+    
     categorias: {
         backgroundColor: '#745739',
         justifyContent: 'center',
@@ -529,7 +541,6 @@ export const styles = StyleSheet.create({
         padding: 14, borderRadius: 8, 
         alignItems: 'center' 
     },
-
     textoBtnFinalizar: { 
         color: '#fff', 
         fontWeight: 'bold' 
